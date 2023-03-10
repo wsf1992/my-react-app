@@ -2,27 +2,18 @@ import React from 'react'
 import {
     createRoutesFromElements,
     createBrowserRouter,
-  } from "react-router-dom";
-  import { Route} from 'react-router'
+    Route
+} from 'react-router-dom'
+
 import Login from '../view/login'
 import App from '../App'
 
-
-export default createBrowserRouter(
+const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
             <Route index element={<Login />} />
-            <Route path="login" element={<Login />}>
-            </Route>
-      </Route>
+            <Route path="login" element={<Login />} />
+        </Route>
     )
 )
-
-
-
-       
-
-
-
-
-    
+export default router
