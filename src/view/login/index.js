@@ -1,6 +1,5 @@
-import React from 'react'
 function Login() {
-    return <h1>login page</h1>
+    return <h1>login1231 page</h1>
 }
 
 export default Login
