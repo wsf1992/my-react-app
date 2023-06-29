@@ -1,4 +1,5 @@
 import './globals.css'
+import '../../public/antd.min.css'; // 添加这行
 import './position.css'
 import { Inter } from 'next/font/google'
 

@@ -6,7 +6,8 @@ import { getHttp } from '@/http/serverapi'
 
 export default async function LogoBox() {
     const headersList = headers()
-    const referer = headersList.get('Referer')
+    const referer = headersList.get('Host')
+    console.log(123456,referer)
     const res = await getHttp('/logo', {
         headers: {
             Referer: referer

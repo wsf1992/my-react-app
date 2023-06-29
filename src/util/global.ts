@@ -1,4 +1,4 @@
-export const randomString = len => {
+export const randomString = (len: number) => {
     len = len || 32
     const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
     const maxPos = $chars.length

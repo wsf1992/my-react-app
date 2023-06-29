@@ -33,7 +33,7 @@ const loginApi = ({
             source,
             nonce,
             'auth-type': authType,
-            timestamp,
+            // timestamp,
             username,
             signature
         },

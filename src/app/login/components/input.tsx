@@ -36,7 +36,7 @@ export default function UserInput({
                     alt=""
                     className={style.icon}
                     width={18}
-                    height={22}
+                    height={21.94}
                 />
             ) : null}
 

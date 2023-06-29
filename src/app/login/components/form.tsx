@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import style from './form.module.scss'
 import { useState } from 'react'
 import Input from './input'
@@ -36,12 +37,12 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
         //     session_id: sessionId
         // })
         router.push('/home')
-        console.log(12312312, result)
+        // console.log(12312312, result)
     }
 
     return (
         <div className={`flex-column ${style.div}`}>
-            <img src={enterprise_language} alt="" className={style.img} />
+            <Image src={enterprise_language} alt="" className={style.img} width={320} height={48}/>
             <Input
                 name="userName"
                 className="mar-b-22"
