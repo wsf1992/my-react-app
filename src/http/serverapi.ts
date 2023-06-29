@@ -1,10 +1,11 @@
+import 'server-only'
+
 import { randomString } from '@/util/global'
 import sha256 from 'crypto-js/sha256'
 
 const source = 'client.web'
 const nonce = randomString(32)
 const baseURL = 'https://env2cmb.emicloud.com:8443'
-
 
 interface LoginApiParams {
     name: string
@@ -26,38 +27,46 @@ const loginApi = ({
     const str = `auth-type=${authType}&nonce=${nonce}&session_id=${session_id}&source=${source}&timestamp=${timestamp}&username=${username}&verify_code=${verify_code}&signatureKey=${signatureKey}`
     const signature = sha256(str).toString().toUpperCase()
 
-    return fetch(
-        'https://env2cmb.emicloud.com:8443/user/token', {
-            method: 'POST',
-            headers: {
-                source,
-                nonce,
-                'auth-type': authType,
-                timestamp,
-                username,
-                signature
-            },
-            body: JSON.stringify({ session_id, verify_code })
-        }
-
-    )
+    return fetch('https://env2cmb.emicloud.com:8443/user/token', {
+        method: 'POST',
+        headers: {
+            source,
+            nonce,
+            'auth-type': authType,
+            timestamp,
+            username,
+            signature
+        },
+        body: JSON.stringify({ session_id, verify_code })
+    })
 }
 
-async function getHttp(url: string) {
+interface GetHttpParams {
+    headers?: object
+    next?: object
+}
+
+async function getHttp(url: string, params?: GetHttpParams) {
+    const headers = params?.headers || {}
+
+    const next = params?.next || {}
+
     const response = await fetch(`${baseURL}${url}`, {
         headers: {
             source,
-            Referer: 'https://env2dev.emicloud.com:8443/',
+            ...headers
+        },
+        next: {
+            ...next
         }
     })
     return response.json()
-
 }
 
-async function getApi(url:string) {
+async function getApi(url: string) {
     const response = await fetch(`${baseURL}${url}`, {
         headers: {
-            source,  
+            source,
             nonce,
             token: 'e56c73a54265bfe91fe18af5fec5862b0dac239f4408bf2ff40bd7049b59ede2'
         }

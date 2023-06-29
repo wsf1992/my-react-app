@@ -6,8 +6,7 @@ import Input from './input'
 import Button from './button'
 import Captcha from './captcha'
 import { useRouter } from 'next/navigation'
-import { loginApi } from '@/http/index'
-
+// import { loginApi } from '@/http/index'
 
 interface IsProps {
     enterprise_language: string
@@ -30,19 +29,19 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
     const isFill = userName && password && code ? true : false
 
     async function submit() {
-        const result = await loginApi({
-            name: userName,
-            password,
-            verify_code: code,
-            session_id: sessionId
-        })
+        // const result = await loginApi({
+        //     name: userName,
+        //     password,
+        //     verify_code: code,
+        //     session_id: sessionId
+        // })
         router.push('/home')
         console.log(12312312, result)
     }
 
     return (
         <div className={`flex-column ${style.div}`}>
-            <img src={enterprise_language} alt="" className={style.img}/>
+            <img src={enterprise_language} alt="" className={style.img} />
             <Input
                 name="userName"
                 className="mar-b-22"
@@ -67,10 +66,10 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
                 value={code}
                 onChange={value => inputhange(value, 'code')}
             >
-                {/* <Captcha
-                    // className="mar-l-10"
-                    // getSessionId={setSessionId}
-                ></Captcha> */}
+                <Captcha
+                    className="mar-l-10"
+                    getSessionId={setSessionId}
+                ></Captcha>
             </Input>
             <Button
                 width="400px"

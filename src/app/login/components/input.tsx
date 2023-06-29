@@ -1,9 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 import style from './input.module.scss'
 import { Input } from 'antd'
-
 
 interface IsProps {
     name?: string
@@ -30,7 +30,15 @@ export default function UserInput({
 
     return (
         <div className={`flex flex-y-center ${className} ${style.div}`}>
-            {leftIcon ? <img src={leftIcon} className={style.icon} /> : null}
+            {leftIcon ? (
+                <Image
+                    src={leftIcon}
+                    alt=""
+                    className={style.icon}
+                    width={18}
+                    height={22}
+                />
+            ) : null}
 
             <Input
                 placeholder={placeholder}
@@ -43,21 +51,33 @@ export default function UserInput({
             />
 
             {value !== '' ? (
-                <img src="/delete.png" onClick={() => onChange('')} className={style.del} />
+                <Image
+                    src="/delete.png"
+                    alt=""
+                    onClick={() => onChange('')}
+                    width={20}
+                    height={20}
+                />
             ) : null}
 
             {password &&
                 (isPassword ? (
-                    <img
+                    <Image
+                        alt=""
                         className={style.eye}
                         src="/eye.png"
                         onClick={() => setIsPassword(false)}
-                     />
+                        width={26}
+                        height={22}
+                    />
                 ) : (
-                    <img
-                    className={style.eye}
+                    <Image
+                        alt=""
+                        className={style.eye}
                         src="/eys_see.png"
                         onClick={() => setIsPassword(true)}
+                        width={26}
+                        height={22}
                     />
                 ))}
             {children}
