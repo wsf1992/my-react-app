@@ -1,0 +1,13 @@
+
+.p {
+    position: absolute;
+    right: -55px;
+    line-height: 40px;
+    margin: 0;
+    color: #91a1a9;
+    font-size: 16px;
+
+    &:hover {
+        color: #229dff;
+    }
+}

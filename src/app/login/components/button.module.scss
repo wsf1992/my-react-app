@@ -1,0 +1,20 @@
+.button {
+    height: 50px;
+    border-radius: 50px;
+    background-color: #229dff;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    outline: none;
+    border-width: 0; 
+
+    &:hover {
+        background-color: #66b1ff;
+    }
+
+    &.disabled {
+        background-color: #a0cfff;
+    }
+}
+
