@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { getHttp } from '@/http/serverapi'
-import style from './qrcode.module.scss'
+import style from '../login.module.scss'
 
 export default async function WechatQrCode() {
     const res = await getHttp('/wechat_QR_code', {
@@ -11,7 +11,7 @@ export default async function WechatQrCode() {
         <Image
             src={src}
             alt=""
-            className={style.img}
+            className={style.qrcode_img}
             width={160}
             height={160}
         />

@@ -1,4 +1,4 @@
-import style from './captcha.module.scss'
+import style from '../login.module.scss'
 import Image from 'next/image'
 import { getHttp } from '@/http/clientapi'
 import { useState, useEffect } from 'react'
@@ -11,7 +11,7 @@ interface IsProps {
 export default function Captcha({
     className,
     getSessionId
-}: IsProps): JSX.Element {
+}: IsProps): JSX.Element | null {
     const [captcha, setCaptcha] = useState('')
 
     async function getCaptcha() {
@@ -26,11 +26,13 @@ export default function Captcha({
         getCaptcha()
     }, [])
 
+    if (!captcha) return null
+
     return (
         <div className={`relative flex ${className}`}>
             <Image src={captcha} alt="" width={110} height={40} />
 
-            <p className={`pointer ${style.p}`} onClick={getCaptcha}>
+            <p className={`pointer ${style.captcha_p}`} onClick={getCaptcha}>
                 换一张
             </p>
         </div>

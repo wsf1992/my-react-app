@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?ar6fud');
+    src: url('fonts/icomoon.eot?ar6fud#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?ar6fud') format('truetype'),
+        url('fonts/icomoon.woff?ar6fud') format('woff'),
+        url('fonts/icomoon.svg?ar6fud#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-uniE911:before {
+    content: '\e911';
+}
+.icon-uniE910:before {
+    content: '\e910';
+}
+.icon-uniE903:before {
+    content: '\e903';
+}
+.icon-12:before {
+    content: '\e900';
+}
+.icon-13:before {
+    content: '\e901';
+}
+.icon-CRM:before {
+    content: '\e902';
+}
+.icon-uniE904:before {
+    content: '\e904';
+}
+.icon-1:before {
+    content: '\e905';
+}
+.icon-2:before {
+    content: '\e906';
+}
+.icon-3:before {
+    content: '\e907';
+}
+.icon-4:before {
+    content: '\e908';
+}
+.icon-5:before {
+    content: '\e909';
+}
+.icon-6:before {
+    content: '\e90a';
+}
+.icon-7:before {
+    content: '\e90b';
+}
+.icon-8:before {
+    content: '\e90c';
+}
+.icon-9:before {
+    content: '\e90d';
+}
+.icon-10:before {
+    content: '\e90e';
+}
+.icon-IVR:before {
+    content: '\e90f';
+}

@@ -1,26 +1,25 @@
 import Image from 'next/image'
 import { headers } from 'next/headers'
-import style from './container.module.scss'
+import style from '../login.module.scss'
 import Form from './form'
 import { getHttp } from '@/http/serverapi'
 
 export default async function LogoBox() {
     const headersList = headers()
-    const referer = headersList.get('Host')
-    console.log(123456,referer)
+    const host = headersList.get('Host')
     const res = await getHttp('/logo', {
         headers: {
-            Referer: referer
+            Referer: host
         }
     })
     const logo = `data:image/jpg;base64,${res.data?.enterprise_logo}`
     const language = `data:image/jpg;base64,${res.data?.enterprise_language}`
     return (
-        <div className={`bg-fff relative ${style.div}`}>
+        <div className={`bg-fff relative ${style.container_div}`}>
             <Image
                 src={logo}
                 alt=""
-                className={style.img}
+                className={style.container_img}
                 width={148}
                 height={148}
             />
@@ -28,7 +27,7 @@ export default async function LogoBox() {
                 <Image
                     src="/login-left.png"
                     alt=""
-                    className={style.limg}
+                    className={style.container_limg}
                     width={449}
                     height={366}
                 />

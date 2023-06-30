@@ -1,0 +1,83 @@
+.layout_div {
+    background-image: url('/loginbg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.qrcode_img {
+    border-radius: 10px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 999;
+}
+.button {
+    height: 50px;
+    border-radius: 50px;
+    background-color: #229dff;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    outline: none;
+    border-width: 0;
+
+    &:hover {
+        background-color: #66b1ff;
+    }
+
+    &.disabled {
+        background-color: #a0cfff;
+    }
+}
+.captcha_p {
+    position: absolute;
+    right: -55px;
+    line-height: 40px;
+    margin: 0;
+    color: #91a1a9;
+    font-size: 16px;
+
+    &:hover {
+        color: #229dff;
+    }
+}
+.container_div {
+    margin-top: 80px;
+}
+.container_img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -74px;
+    margin: auto;
+}
+.container_limg {
+    margin: 128px 0 86px 44px;
+}
+.copyright_div {
+    font-size: 14px;
+    text-align: center;
+    height: 40px;
+}
+.container_a {
+    text-decoration: none;
+    color: #229dff;
+}
+.form_div {
+    width: 530px;
+    margin-left: 45px;
+}
+.form_img {
+    margin: 92px 0 39px 83px;
+}
+.input_div {
+    border-bottom: 1px solid #dcdfe6;
+    height: 50px;
+    width: 395px;
+}
+.input_icon {
+    margin: 0 9px;
+}
+.input_eye {
+    margin-left: 14px;
+}

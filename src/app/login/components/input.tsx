@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import style from './input.module.scss'
+import style from '../login.module.scss'
 import { Input } from 'antd'
 
 interface IsProps {
@@ -29,12 +29,12 @@ export default function UserInput({
     const [isPassword, setIsPassword] = useState(true)
 
     return (
-        <div className={`flex flex-y-center ${className} ${style.div}`}>
+        <div className={`flex flex-y-center ${className} ${style.input_div}`}>
             {leftIcon ? (
                 <Image
                     src={leftIcon}
                     alt=""
-                    className={style.icon}
+                    className={style.input_icon}
                     width={18}
                     height={21.94}
                 />
@@ -64,7 +64,7 @@ export default function UserInput({
                 (isPassword ? (
                     <Image
                         alt=""
-                        className={style.eye}
+                        className={style.input_eye}
                         src="/eye.png"
                         onClick={() => setIsPassword(false)}
                         width={26}
@@ -73,7 +73,7 @@ export default function UserInput({
                 ) : (
                     <Image
                         alt=""
-                        className={style.eye}
+                        className={style.input_eye}
                         src="/eys_see.png"
                         onClick={() => setIsPassword(true)}
                         width={26}

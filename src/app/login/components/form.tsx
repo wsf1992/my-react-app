@@ -1,13 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import style from './form.module.scss'
+import style from '../login.module.scss'
 import { useState } from 'react'
 import Input from './input'
 import Button from './button'
 import Captcha from './captcha'
 import { useRouter } from 'next/navigation'
-// import { loginApi } from '@/http/index'
+import { login } from '@/http/clientapi'
 
 interface IsProps {
     enterprise_language: string
@@ -30,19 +30,27 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
     const isFill = userName && password && code ? true : false
 
     async function submit() {
-        // const result = await loginApi({
-        //     name: userName,
-        //     password,
-        //     verify_code: code,
-        //     session_id: sessionId
-        // })
-        router.push('/home')
-        // console.log(12312312, result)
+        const result = await login({
+            name: userName,
+            password,
+            verify_code: code,
+            session_id: sessionId
+        })
+        if (result.data.code === 200) {
+            sessionStorage.setItem('token', result.data.data.token)
+            router.push('/main')
+        }
     }
 
     return (
-        <div className={`flex-column ${style.div}`}>
-            <Image src={enterprise_language} alt="" className={style.img} width={320} height={48}/>
+        <div className={`flex-column ${style.form_div}`}>
+            <Image
+                src={enterprise_language}
+                alt=""
+                className={style.form_img}
+                width={320}
+                height={48}
+            />
             <Input
                 name="userName"
                 className="mar-b-22"

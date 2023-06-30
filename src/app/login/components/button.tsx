@@ -1,6 +1,6 @@
 'use client'
 
-import style from './button.module.scss'
+import style from '../login.module.scss'
 
 interface IsProps {
     width?: string
