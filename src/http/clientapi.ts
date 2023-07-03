@@ -14,7 +14,7 @@ const instance = axios.create({
     headers: {
         source,
         nonce,
-        token: sessionStorage.getItem('token')
+        // token: sessionStorage.getItem('token')
     }
 })
 

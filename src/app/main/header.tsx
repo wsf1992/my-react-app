@@ -24,7 +24,9 @@ function Header() {
                     src={iconUrl}
                     alt=""
                     onClick={() => {
-                        setCollapse(!isCollapse)
+                        if(setCollapse) {
+                            setCollapse(!isCollapse)
+                        }
                     }}
                     className={style.header_menu_img}
                     width={20}

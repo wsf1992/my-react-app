@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useState } from 'react'
 
-const CollapseContext = createContext(null)
+const CollapseContext = createContext<boolean|undefined>(undefined)
 
-const CollapseSetContext = createContext(null)
+const CollapseSetContext = createContext<((val:boolean) => void)|undefined>(undefined)
 
 export function CollapseProvider({ children }: { children: React.ReactNode }) {
     const [isCollapse, setIsCollapse] = useState(false)
@@ -18,10 +18,10 @@ export function CollapseProvider({ children }: { children: React.ReactNode }) {
     )
 }
 
-export function useCollapse(): boolean {
+export function useCollapse() {
     return useContext(CollapseContext)
 }
 
-export function useCollapseSet(): (val: boolean) => void {
+export function useCollapseSet() {
     return useContext(CollapseSetContext)
 }

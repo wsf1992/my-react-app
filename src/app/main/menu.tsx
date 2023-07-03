@@ -11,6 +11,7 @@ import { useCollapse } from './collapseProvider'
 import topline from '@p/topline.png'
 import bottomline from '@p/bottomline.png'
 import middleline from '@p/middleline.png'
+import { ItemType } from 'antd/es/breadcrumb/Breadcrumb'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -26,6 +27,7 @@ interface MenuData {
     icon: string
     menu_name: string
 }
+
 
 function formatMenuData(data: MenuData[], isChildren: boolean = false): MenuItem[] {
     return data.map(
@@ -91,16 +93,16 @@ function formatMenuData(data: MenuData[], isChildren: boolean = false): MenuItem
 }
 
 export default function MyMenu(): JSX.Element {
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState<MenuItem[] | undefined>([])
     const [defaultSelectedKeys, setDefaultSelectedKeys] = useState([''])
     const [openKeys, setOpenKeys] = useState<string[]>([])
     const isCollapse = useCollapse()
     // const hasMenu = items.length
     const hasMenu = true
 
-    function clickHandle(key: string) {
-        console.log(123, key)
-    }
+    // function clickHandle(info): void {
+    //     console.log(123, info);
+    // }
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {
         const latestOpenKey: string | undefined = keys.find(
@@ -111,8 +113,14 @@ export default function MyMenu(): JSX.Element {
 
     async function getMenuList() {
         const res = await getHttp('/menu')
-        const nItems = formatMenuData(res.data.data)
-        setItems(nItems)
+        const nItems = formatMenuData(res.data.data) as ItemType[]
+        // setItems(nItems)
+        nItems.forEach(item => {
+            if (item.title === null) {
+                item.title = undefined
+            }
+        })
+        setItems(nItems as any)
     }
     useEffect(() => {
         getMenuList()
@@ -140,7 +148,7 @@ export default function MyMenu(): JSX.Element {
                         inlineCollapsed={isCollapse}
                         items={items}
                         openKeys={openKeys}
-                        onClick={clickHandle}
+                        // onClick={clickHandle}
                         onOpenChange={onOpenChange}
                     />
                 )}
