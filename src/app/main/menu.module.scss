@@ -5,55 +5,97 @@
     overflow-y: hidden;
     background-color: #2f3137;
 
-    &.menu-content {
+    :global(.menu-content) {
         width: 220px;
         height: 100%;
         overflow: auto;
     }
 
-    &.define-menu {
+    :global(.define-menu) {
         width: 200px;
         background-color: transparent !important;
 
-        .ant-menu-submenu-title {
+        :global(.ant-menu) {
+            background: none !important;
+        }
+
+        :global(.ant-menu-submenu-title) {
             height: 52px !important;
             line-height: 52px !important;
             margin-inline: unset !important;
             margin-block: unset !important;
+
         }
-        .ant-menu-submenu-open .ant-menu-submenu-title {
+        :global(.ant-menu-submenu-open .ant-menu-submenu-title) {
             color: #409eff !important;
+            border-radius: 0 !important;
+        }
+        :global(.ant-menu-submenu-open .ant-menu-submenu-title:before) {
+            display: block;
+            width: 3px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #20a0ff;
+            content: "";
         }
 
-        .ant-menu-submenu-title:active {
+        :global(.ant-menu-submenu-active .ant-menu-submenu-title:before) {
+            display: block;
+            width: 3px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #20a0ff;
+            content: "";
+        }
+
+
+        :global(.ant-menu-submenu-title:active) {
             background-color: transparent !important;
         }
 
-        .ant-menu-item-selected {
+        :global(.ant-menu-item-selected) {
             color: #26c1ff !important;
             background-color: transparent !important;
         }
+        :global(.ant-menu-item) {
+            margin: 0 !important;
+        }
 
-        .ant-menu-item:active {
+        :global(.ant-menu-item:active) {
             background-color: transparent !important;
         }
-        .ant-menu-item-icon {
+        :global(.ant-menu-item-icon) {
             font-size: 18px !important;
         }
-        .ant-menu-item {
+        :global(.ant-menu-item) {
             margin: 0 !important;
             height: 46px !important;
             line-height: 46px !important;
             padding-right: 0 !important;
         }
+        :global(.ant-menu-inline-collapsed) {
+            height: 40px !important;
+            line-height: 40px !important;
+
+            &:global(.ant-menu-item-icon) {
+                display: none;
+            }
+        }
     }
 
-    &.is-collapse,
-    &.is-collapse .menu-content,
-    &.is-collapse .define-menu {
+    &:global(.is-collapse),
+    &:global(.is-collapse .menu-content),
+    &:global(.is-collapse .define-menu) 
+    {
+        transition: all 0.5s;
         width: 50px !important;
     }
 }
+
 
 .top_img {
     margin-top: 10px;
@@ -63,4 +105,10 @@
 }
 .middle_img {
     margin-top: 2px;
+}
+
+:global(.ant-menu) {
+    .top_img,.bottom_img,.middle_img {
+        display: none !important;
+    }
 }

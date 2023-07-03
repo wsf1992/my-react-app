@@ -27,7 +27,7 @@ interface MenuData {
     menu_name: string
 }
 
-function formatMenuData(data: MenuData[], isChildren = false): MenuItem[] {
+function formatMenuData(data: MenuData[], isChildren: boolean = false): MenuItem[] {
     return data.map(
         ({ id: key, icon, children = [], menu_name: label }, index) => {
             let IconDom
@@ -134,7 +134,7 @@ export default function MyMenu(): JSX.Element {
                 {hasMenu && (
                     <Menu
                         className="define-menu"
-                        // defaultSelectedKeys={defaultSelectedKeys}
+                        triggerSubMenuAction="click"
                         mode="inline"
                         theme="dark"
                         inlineCollapsed={isCollapse}
