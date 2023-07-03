@@ -4,6 +4,7 @@ import style from '../login.module.scss'
 import Form from './form'
 import { getHttp } from '@/http/serverapi'
 
+const leftImg = '/login-left.png'
 export default async function LogoBox() {
     const headersList = headers()
     const host = headersList.get('Host')
@@ -25,11 +26,12 @@ export default async function LogoBox() {
             />
             <div className="flex">
                 <Image
-                    src="/login-left.png"
+                    src={leftImg}
                     alt=""
                     className={style.container_limg}
                     width={449}
                     height={366}
+                    priority
                 />
                 <Form enterprise_language={language}></Form>
             </div>

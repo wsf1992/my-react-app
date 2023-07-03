@@ -40,7 +40,7 @@ function formatMenuData(data: MenuData[], isChildren = false): MenuItem[] {
                             src={topline}
                             alt=""
                             className={style.top_img}
-                            width={35}
+                            width={22}
                             height={36}
                         />
                     )
@@ -49,7 +49,7 @@ function formatMenuData(data: MenuData[], isChildren = false): MenuItem[] {
                         IconDom = (
                             <Image
                                 alt=""
-                                width={35}
+                                width={22}
                                 height={36}
                                 src={topline}
                                 className={style.top_img}
@@ -59,7 +59,7 @@ function formatMenuData(data: MenuData[], isChildren = false): MenuItem[] {
                         IconDom = (
                             <Image
                                 alt=""
-                                width={35}
+                                width={22}
                                 height={22}
                                 src={bottomline}
                                 className={style.bottom_img}
@@ -69,7 +69,7 @@ function formatMenuData(data: MenuData[], isChildren = false): MenuItem[] {
                         IconDom = (
                             <Image
                                 alt=""
-                                width={35}
+                                width={22}
                                 height={46}
                                 src={middleline}
                                 className={style.middle_img}
@@ -93,18 +93,20 @@ function formatMenuData(data: MenuData[], isChildren = false): MenuItem[] {
 export default function MyMenu(): JSX.Element {
     const [items, setItems] = useState([])
     const [defaultSelectedKeys, setDefaultSelectedKeys] = useState([''])
-    const [openKeys, setPpenKeys] = useState([])
+    const [openKeys, setOpenKeys] = useState<string[]>([])
     const isCollapse = useCollapse()
     // const hasMenu = items.length
     const hasMenu = true
 
-    function onOpenChange(key) {
-        setPpenKeys([
-            key.find(e => {
-                console.log(1111111111, e, openKeys[0])
-                return e.indexOf(openKeys[0]) === -1 || null
-            })
-        ])
+    function clickHandle(key: string) {
+        console.log(123, key)
+    }
+
+    const onOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {
+        const latestOpenKey: string | undefined = keys.find(
+            key => openKeys.indexOf(key) === -1
+        )
+        setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
     }
 
     async function getMenuList() {
@@ -122,7 +124,7 @@ export default function MyMenu(): JSX.Element {
                 style.menu_box_div
             }`}
         >
-            <div className="menu-content">
+            <div className="menu-content flex-column ">
                 <Image
                     alt=""
                     width={200}
@@ -132,12 +134,13 @@ export default function MyMenu(): JSX.Element {
                 {hasMenu && (
                     <Menu
                         className="define-menu"
-                        defaultSelectedKeys={defaultSelectedKeys}
+                        // defaultSelectedKeys={defaultSelectedKeys}
                         mode="inline"
                         theme="dark"
                         inlineCollapsed={isCollapse}
                         items={items}
                         openKeys={openKeys}
+                        onClick={clickHandle}
                         onOpenChange={onOpenChange}
                     />
                 )}
