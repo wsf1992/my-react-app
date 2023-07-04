@@ -51,7 +51,6 @@
     &:global(.is-collapse),
     &:global(.is-collapse .menu-content),
     &:global(.is-collapse .define-menu) {
-        transition: all 0.1s;
         width: 50px !important;
     }
 }

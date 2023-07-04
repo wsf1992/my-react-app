@@ -1,17 +1,15 @@
 import { CollapseProvider } from './collapseProvider'
 import Menu from './menu'
 import Header from './header'
-import {WorkBench, WorkBenchMicro} from './workBenchImg'
+import { WorkBench, WorkBenchMicro } from './img'
 import { headers } from 'next/headers'
 import { getHttp } from '@/http/serverapi'
-
 
 export default async function Layout({
     children
 }: {
     children: React.ReactNode
 }): Promise<JSX.Element> {
-
     const headersList = headers()
     const host = headersList.get('Host')
     const res = await getHttp('/logo', {
@@ -29,8 +27,10 @@ export default async function Layout({
         <div className="flex flex-auto">
             <CollapseProvider>
                 <Menu
-                    workImg={<WorkBench src={workbench_config}/>}
-                    workMicriImg={<WorkBenchMicro src={workbench_config_micro}/>}
+                    workImg={<WorkBench src={workbench_config} />}
+                    workMicriImg={
+                        <WorkBenchMicro src={workbench_config_micro} />
+                    }
                     bgColor={bgColor}
                     color={color}
                     activeColor={activeColor}

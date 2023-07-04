@@ -1,17 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { Menu, ConfigProvider } from 'antd'
 import type { MenuProps } from 'antd'
 import { getHttp } from '@/http/clientapi'
 import style from './menu.module.scss'
 import { useCollapse } from './collapseProvider'
 
-import topline from '@p/topline.png'
-import bottomline from '@p/bottomline.png'
-import middleline from '@p/middleline.png'
 import { ItemType } from 'antd/es/breadcrumb/Breadcrumb'
+
+import { TopLine, BottomLine, MiddleLine } from './img'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -39,46 +37,14 @@ function formatMenuData(
                 IconDom = <i className={icon} />
             } else {
                 if (data.length == 1) {
-                    IconDom = (
-                        <Image
-                            src={topline}
-                            alt=""
-                            className={style.top_img}
-                            width={22}
-                            height={36}
-                        />
-                    )
+                    IconDom = <TopLine />
                 } else if (data.length > 1) {
                     if (index == 0) {
-                        IconDom = (
-                            <Image
-                                alt=""
-                                width={22}
-                                height={36}
-                                src={topline}
-                                className={style.top_img}
-                            />
-                        )
+                        IconDom = <TopLine />
                     } else if (index == data.length - 1) {
-                        IconDom = (
-                            <Image
-                                alt=""
-                                width={22}
-                                height={22}
-                                src={bottomline}
-                                className={style.bottom_img}
-                            />
-                        )
+                        IconDom = <BottomLine />
                     } else {
-                        IconDom = (
-                            <Image
-                                alt=""
-                                width={22}
-                                height={46}
-                                src={middleline}
-                                className={style.middle_img}
-                            />
-                        )
+                        IconDom = <MiddleLine />
                     }
                 }
             }
@@ -140,22 +106,25 @@ export default function MyMenu({
 
     return (
         <div
-            className={`flex-column ${isCollapse && 'is-collapse'} ${style.menu_box_div
-                }`}
+            className={`flex-column ${isCollapse && 'is-collapse'} ${
+                style.menu_box_div
+            }`}
         >
             {!isCollapse ? workImg : workMicriImg}
-            <div className="menu-content" style={{backgroundColor: bgColor}}>
-                <ConfigProvider theme={{
-                    components: {
-                        Menu: {
-                            colorBgContainer: bgColor, // 背景颜色
-                            colorBgElevated: bgColor, // 背景颜色
-                            controlItemBgActive: bgColor, // 背景颜色
-                            colorText: color, // 默认颜色
-                            colorPrimary: activeColor, // 选中颜色
+            <div className="menu-content" style={{ backgroundColor: bgColor }}>
+                <ConfigProvider
+                    theme={{
+                        components: {
+                            Menu: {
+                                colorBgContainer: bgColor, // 背景颜色
+                                colorBgElevated: bgColor, // 背景颜色
+                                controlItemBgActive: bgColor, // 背景颜色
+                                colorText: color, // 默认颜色
+                                colorPrimary: activeColor // 选中颜色
+                            }
                         }
-                    }                         
-                }}>
+                    }}
+                >
                     <Menu
                         inlineIndent={30}
                         className="define-menu"
