@@ -74,13 +74,13 @@ export default function MyMenu({
     activeColor: string
 }): JSX.Element {
     const [items, setItems] = useState<MenuItem[] | undefined>([])
-    const [defaultSelectedKeys, setDefaultSelectedKeys] = useState([''])
+    const [selectedKeys, setSelectedKeys] = useState<string[]>([])
     const [openKeys, setOpenKeys] = useState<string[]>([])
     const isCollapse = useCollapse()
 
-    // function clickHandle(info): void {
-    //     console.log(123, info);
-    // }
+    function clickHandle({ key }: {key: string}): void {
+        setSelectedKeys([key])
+    }
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {
         const latestOpenKey: string | undefined = keys.find(
@@ -92,12 +92,12 @@ export default function MyMenu({
     async function getMenuList() {
         const res = await getHttp('/menu')
         const nItems = formatMenuData(res.data.data) as ItemType[]
-        // setItems(nItems)
         nItems.forEach(item => {
             if (item.title === null) {
                 item.title = undefined
             }
         })
+        setSelectedKeys([nItems[0].key?.toString()] as any)
         setItems(nItems as any)
     }
     useEffect(() => {
@@ -126,14 +126,14 @@ export default function MyMenu({
                     }}
                 >
                     <Menu
-                        inlineIndent={30}
+                        selectedKeys={selectedKeys}
                         className="define-menu"
                         triggerSubMenuAction="click"
                         mode="inline"
                         inlineCollapsed={isCollapse}
                         items={items}
                         openKeys={openKeys}
-                        // onClick={clickHandle}
+                        onClick={clickHandle}
                         onOpenChange={onOpenChange}
                     />
                 </ConfigProvider>
