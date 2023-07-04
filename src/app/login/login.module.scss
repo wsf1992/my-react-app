@@ -25,7 +25,7 @@
         background-color: #66b1ff;
     }
 
-    &.disabled {
+    &:global(.disabled) {
         background-color: #a0cfff;
     }
 }

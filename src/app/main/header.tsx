@@ -4,7 +4,7 @@ import '@/style/style.css'
 import style from './main.module.scss'
 import Image from 'next/image'
 import pickImg from '@p/pickup-menu.png'
-import openImg from '@p/pickup-menu.png'
+import openImg from '@p/open-menu.png'
 import { useCollapse, useCollapseSet } from './collapseProvider'
 
 function Header() {
@@ -24,7 +24,7 @@ function Header() {
                     src={iconUrl}
                     alt=""
                     onClick={() => {
-                        if(setCollapse) {
+                        if (setCollapse) {
                             setCollapse(!isCollapse)
                         }
                     }}

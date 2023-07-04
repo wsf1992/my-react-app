@@ -10,16 +10,15 @@ const baseURL = 'https://env2cmb.emicloud.com:8443'
 
 const instance = axios.create({
     baseURL,
-    timeout: 10000,
-    headers: {
-        source,
-        nonce,
-        // token: sessionStorage.getItem('token')
-    }
+    timeout: 10000
 })
 
 function getHttp(url: string) {
-    return instance.get(url)
+    return instance({
+        url,
+        method: 'get',
+        headers: { source, nonce, token: sessionStorage.getItem('token') }
+    })
 }
 
 interface LoginApiParams {
@@ -36,8 +35,8 @@ function login({ name, password, session_id, verify_code }: LoginApiParams) {
     const str = `auth-type=${authType}&nonce=${nonce}&session_id=${session_id}&source=${source}&timestamp=${timestamp}&username=${username}&verify_code=${verify_code}&signatureKey=${signatureKey}`
     const signature = sha256(str).toString().toUpperCase()
 
-    return axios({
-        url: `${baseURL}/user/token`,
+    return instance({
+        url: '/user/token',
         method: 'POST',
         headers: {
             source,

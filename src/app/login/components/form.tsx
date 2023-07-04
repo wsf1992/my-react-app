@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import style from '../login.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Input from './input'
 import Button from './button'
 import Captcha from './captcha'
@@ -30,6 +30,7 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
     const isFill = userName && password && code ? true : false
 
     async function submit() {
+        if (!isFill) return
         const result = await login({
             name: userName,
             password,
@@ -41,6 +42,15 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
             router.push('/main')
         }
     }
+
+    useEffect(() => {
+        function onKeyDown(e: KeyboardEvent) {
+            if (e.key === 'Enter') submit()
+        }
+        document.addEventListener('keydown', onKeyDown)
+
+        return () => document.removeEventListener('keydown', onKeyDown)
+    })
 
     return (
         <div className={`flex-column ${style.form_div}`}>
