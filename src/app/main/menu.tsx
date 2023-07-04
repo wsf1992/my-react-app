@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { Menu } from 'antd'
+import { Menu, ConfigProvider } from 'antd'
 import type { MenuProps } from 'antd'
 import { getHttp } from '@/http/clientapi'
 import style from './menu.module.scss'
@@ -96,10 +96,16 @@ function formatMenuData(
 
 export default function MyMenu({
     workImg,
-    workMicriImg
+    workMicriImg,
+    bgColor,
+    color,
+    activeColor
 }: {
     workImg: React.ReactElement
     workMicriImg: React.ReactElement
+    bgColor: string
+    color: string
+    activeColor: string
 }): JSX.Element {
     const [items, setItems] = useState<MenuItem[] | undefined>([])
     const [defaultSelectedKeys, setDefaultSelectedKeys] = useState([''])
@@ -134,28 +140,34 @@ export default function MyMenu({
 
     return (
         <div
-            className={`flex-column ${isCollapse && 'is-collapse'} ${
-                style.menu_box_div
-            }`}
+            className={`flex-column ${isCollapse && 'is-collapse'} ${style.menu_box_div
+                }`}
         >
             {!isCollapse ? workImg : workMicriImg}
-            <div className="menu-content">
-                <Menu
-                    inlineIndent={30}
-                    className="define-menu"
-                    triggerSubMenuAction="click"
-                    mode="inline"
-                    theme="dark"
-                    inlineCollapsed={isCollapse}
-                    items={items}
-                    openKeys={openKeys}
-                    // onClick={clickHandle}
-                    onOpenChange={onOpenChange}
-                    style={{
-                        color: '#3110eb',
-                        background: '#dd113d'
-                    }}
-                />
+            <div className="menu-content" style={{backgroundColor: bgColor}}>
+                <ConfigProvider theme={{
+                    components: {
+                        Menu: {
+                            colorBgContainer: bgColor, // 背景颜色
+                            colorBgElevated: bgColor, // 背景颜色
+                            controlItemBgActive: bgColor, // 背景颜色
+                            colorText: color, // 默认颜色
+                            colorPrimary: activeColor, // 选中颜色
+                        }
+                    }                         
+                }}>
+                    <Menu
+                        inlineIndent={30}
+                        className="define-menu"
+                        triggerSubMenuAction="click"
+                        mode="inline"
+                        inlineCollapsed={isCollapse}
+                        items={items}
+                        openKeys={openKeys}
+                        // onClick={clickHandle}
+                        onOpenChange={onOpenChange}
+                    />
+                </ConfigProvider>
             </div>
         </div>
     )
