@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import style from '../login.module.scss'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useDeferredValue } from 'react'
 import Input from './input'
 import Button from './button'
 import Captcha from './captcha'
@@ -50,7 +50,11 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
         document.addEventListener('keydown', onKeyDown)
 
         return () => document.removeEventListener('keydown', onKeyDown)
-    })
+    }, [])
+
+    useEffect(() => {
+        sessionStorage.clear()
+    },[])
 
     return (
         <div className={`flex-column ${style.form_div}`}>

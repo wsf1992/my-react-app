@@ -6,6 +6,7 @@ import type { MenuProps } from 'antd'
 import { getHttp } from '@/http/clientapi'
 import style from './menu.module.scss'
 import { useCollapse } from './collapseProvider'
+import Link from 'next/link'
 
 import { ItemType } from 'antd/es/breadcrumb/Breadcrumb'
 
@@ -24,6 +25,7 @@ interface MenuData {
     children: any[]
     icon: string
     menu_name: string
+    frontend_route: string
 }
 
 function formatMenuData(
@@ -31,7 +33,7 @@ function formatMenuData(
     isChildren: boolean = false
 ): MenuItem[] {
     return data.map(
-        ({ id: key, icon, children = [], menu_name: label }, index) => {
+        ({ id: key, icon, children = [], menu_name: label, frontend_route }, index) => {
             let IconDom
             if (!isChildren) {
                 IconDom = <i className={icon} />
@@ -54,7 +56,7 @@ function formatMenuData(
                 children: children.length
                     ? formatMenuData(children, true)
                     : null,
-                label
+                label: <Link href={`/main/${frontend_route}`}>{label}</Link>
             }
         }
     )
@@ -78,8 +80,9 @@ export default function MyMenu({
     const [openKeys, setOpenKeys] = useState<string[]>([])
     const isCollapse = useCollapse()
 
-    function clickHandle({ key }: {key: string}): void {
+    function clickHandle({ key, keyPath, item }: {key: string, keyPath: string, item:any}): void {
         setSelectedKeys([key])
+        console.log(key,keyPath, item)
     }
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {

@@ -36,6 +36,7 @@ function Header() {
                 />
                 <p className={style.header_epname_p}>13123213</p>
             </div>
+            <User />
         </div>
     )
 }
