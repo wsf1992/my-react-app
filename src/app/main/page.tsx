@@ -1,3 +1,3 @@
 export default function A() {
-    return <div>page123</div>
+    return <div className="flex-auto">page123</div>
 }
