@@ -12,59 +12,35 @@ interface IsProps {
 }
 export default function MyButton(props: IsProps) {
     return (
-        <>
-            <button
-                className={`pointer ${props.className} ${
-                    props.disabled && 'disabled'
-                } ${style.button}`}
+        <ConfigProvider
+            theme={{
+                components: {
+                    Button: {
+                        colorTextLightSolid: '#fff',
+                        colorTextDisabled: '#fff',
+                        colorPrimary: '#229dff',
+                        colorPrimaryHover: '#66b1ff',
+                        colorPrimaryActive: '#66b1ff',
+                        colorBgContainerDisabled: '#a0cfff',
+                        borderRadius: 50,
+                        fontSize: 20,
+                        controlHeight: 50
+                    }
+                }
+            }}
+        >
+            <Button
+                type="primary"
+                className={`pointer ${props.className}`}
                 style={{
                     width: props.width ? props.width : '100%'
                 }}
                 disabled={props.disabled}
+                loading={props.loading}
                 onClick={() => props.onClick()}
             >
                 {props.children ? props.children : '按钮'}
-            </button>
-
-            <ConfigProvider
-            theme={{
-                components: {
-                  Button: {
-                    colorBgContainer: '#229dff',
-                    colorBgContainerDisabled: '#a0cfff',
-                    // colorPrimaryBgHover: '#a0cfff',
-                    // colorBgTextHover: '#a0cfff',
-                    // colorText: '#fff',
-                    // colorTextDisabled: '#fff',
-                    // colorPrimary: '#fff',
-                    // colorPrimaryHover: '#fff',
-                    // colorPrimaryActive: '#fff',
-                    // colorPrimary: '#229dff',
-                    borderRadius: 50,
-                    fontSize: 20,
-                    controlHeight: 50,
-                    lineWidth: 0,
-                    lineWidthFocus: 0,
-                    controlOutlineWidth: 0,
-                  },
-                },
-              }}
-            >
-
-
-            <Button
-            className={`pointer ${props.className}`}
-            style={{
-                width: props.width ? props.width : '100%'
-            }}
-            disabled={props.disabled}
-            loading={props.loading}
-            onClick={() => props.onClick()}
-            >
-                {props.children ? props.children : '按钮'}
             </Button>
-            </ConfigProvider>
-        </>
+        </ConfigProvider>
     )
 }
-

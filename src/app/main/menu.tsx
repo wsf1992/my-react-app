@@ -33,7 +33,10 @@ function formatMenuData(
     isChildren: boolean = false
 ): MenuItem[] {
     return data.map(
-        ({ id: key, icon, children = [], menu_name: label, frontend_route }, index) => {
+        (
+            { id: key, icon, children = [], menu_name: label, frontend_route },
+            index
+        ) => {
             let IconDom
             if (!isChildren) {
                 IconDom = <i className={icon} />
@@ -76,13 +79,14 @@ export default function MyMenu({
     activeColor: string
 }): JSX.Element {
     const [items, setItems] = useState<MenuItem[] | undefined>([])
-    const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+    const [selectedKeys, setSelectedKeys] = useState<string[]>([''])
     const [openKeys, setOpenKeys] = useState<string[]>([])
     const isCollapse = useCollapse()
 
-    function clickHandle({ key, keyPath, item }: {key: string, keyPath: string, item:any}): void {
+    function clickHandle(info: any): void {
+        const { key, keyPath } = info
         setSelectedKeys([key])
-        console.log(key,keyPath, item)
+        console.log(key, keyPath)
     }
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {

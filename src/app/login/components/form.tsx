@@ -20,6 +20,7 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
     const [password, setPassword] = useState('')
     const [code, setCode] = useState('')
     const [sessionId, setSessionId] = useState('')
+    const [loading, setLoading] = useState(false)
 
     function inputhange(value: string, name: string): void {
         if (name === 'userName') setUserName(value)
@@ -30,7 +31,8 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
     const isFill = userName && password && code ? true : false
 
     async function submit() {
-        if (!isFill) return
+        if (!isFill || loading) return
+        setLoading(true)
         const result = await login({
             name: userName,
             password,
@@ -41,6 +43,7 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
             sessionStorage.setItem('token', result.data.data.token)
             router.push('/main')
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -54,7 +57,7 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
 
     useEffect(() => {
         sessionStorage.clear()
-    },[])
+    }, [])
 
     return (
         <div className={`flex-column ${style.form_div}`}>
@@ -98,6 +101,7 @@ export default function Form({ enterprise_language }: IsProps): JSX.Element {
                 width="400px"
                 className="mar-t-50"
                 disabled={!isFill}
+                loading={loading}
                 onClick={submit}
             >
                 登录
